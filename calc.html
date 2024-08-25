@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple calc</title>
+    <style>
+        body {
+            padding-top: 35px;
+            background-color: chocolate;
+        }
+        .operator {
+            margin-top: 15px;
+            background-color: rgb(54, 54, 5);
+            font-size: 17px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            border-radius: 12px;
+            border: 0.5px solid brown;
+            box-shadow: 2px 1.5px 1px gray;
+            height: 42px;
+            cursor: pointer;
+            margin-left: 16px;
+            color: beige;
+            transition: all ease 0.2s;
+        }
+        .operator:hover {
+            background-color: #000;
+        }
+        .operator:active {
+            box-shadow: 2px 0.2px 0.2px rgb(251, 255, 0);
+            transform: translate(1.5px, 1.5px);
+            background-color: rgb(29, 29, 3);
+        }
+
+        input {
+            width: 400px;
+            height: 42px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 20px;
+            border-radius: 5px;
+            margin-left: 15px;
+            text-indent: 18px;
+            vertical-align: bottom;
+            padding-right: 33px;
+            background-color: rgb(215 215 215 / 72%);
+            box-shadow: inset 9px 10px 9px -9px rgba(0, 0, 0, 0.75);
+        }
+
+        .result {
+            font-size: 40px;
+            color: rgb(1, 15, 1);
+            font-weight: bold;
+            font-family: cursive;
+        }
+
+        #math {
+            width: 86px;
+            height: 47px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 22px;
+            border-radius: 5px;
+            margin-left: 15px;
+            text-indent: 18px;
+            vertical-align: bottom;
+            padding-right: 33px;
+            text-align: center;
+            background-color: #ec7622;
+            cursor: pointer;
+            transition: all ease 0.2s;
+        }
+        #math:hover {
+            background-color: #fc7e24;
+        }
+        .equal {
+            font-size: 36px;
+            margin-left: 23px;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" class="first">
+    <select name="math" id="math">
+        <option value="sum">+</option>
+        <option value="minus">-</option>
+        <option value="multiplier">*</option>
+        <option value="divide">/</option>
+    </select>
+    <input type="text" class="second">
+    <span class="equal">=</span>
+    <span class="result"></span>
+    <div><button class="operator" onclick="calc()"> calculate </button></div>
+
+
+
+
+    <script>
+
+        function calc() {
+            var firstNumber = document.querySelector(".first");
+            var secondNumber = document.querySelector(".second");
+            var result = document.querySelector(".result");
+            var select = document.getElementById("math");
+            if (firstNumber.value.length == 0 && secondNumber.value.length == 0) {
+                alert("You need to add numbers")
+                firstNumber.focus();
+                return;
+            }
+            if (firstNumber.value.length == 0) {
+                alert("Add first number please")
+                firstNumber.focus();
+                return;
+            }
+            if (secondNumber.value.length == 0) {
+                alert("Add second number please")
+                firstNumber.focus();
+                return;
+            }
+            if (select.value == "sum") {
+                var answer = Number(firstNumber.value) + Number(secondNumber.value);
+                result.innerHTML = answer;
+                clear(firstNumber, secondNumber);
+                return;
+            }
+            if (select.value == "minus") {
+                var answer = Number(firstNumber.value) - Number(secondNumber.value);
+                result.innerHTML = answer;
+                clear(firstNumber, secondNumber);
+                return;
+            }
+            if (select.value == "multiplier") {
+                var answer = Number(firstNumber.value) * Number(secondNumber.value);
+                result.innerHTML = answer;
+                clear(firstNumber, secondNumber);
+                return;
+            }
+            if (select.value == "divide") {
+                var answer = Number(firstNumber.value) / Number(secondNumber.value);
+                result.innerHTML = answer;
+                clear(firstNumber, secondNumber);
+                return;
+            }
+        }
+        function clear(firstNum, secondNum) {
+            firstNum.focus();
+            firstNum.value = "";
+            secondNum.value = "";
+        }
+        var firstNumber = document.querySelector(".first");
+        var secondNumber = document.querySelector(".second");
+        firstNumber.addEventListener("keydown", function (event) {
+            if (event.key == "Enter") {
+                calc();
+            }
+        })
+
+        secondNumber.addEventListener("keydown", function (event) {
+            if (event.key == "Enter") {
+                calc();
+            }
+        })
+
+
+
+    </script>
+</body>
+
+</html>
